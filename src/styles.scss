@@ -59,3 +59,38 @@ a {
     text-decoration: underline;
   }
 }
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  transition: 0.2s;
+}
+
+button:disabled {
+  background-color: #ddd;
+  color: #555;
+}
+
+button.danger {
+  background: #ff0000;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button.secondary {
+  background: #6c757d;
+}
+
+.actions {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}

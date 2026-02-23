@@ -58,6 +58,6 @@
     </mat-card>
 	<div class="align-content">
 		@if(loading){<mat-spinner color="primary" mode="indeterminate"></mat-spinner><br/>}
-		<button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading && !mainForm.valid">Connexion</button>
+		<button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading || !mainForm.valid">S'inscrire</button>
 	</div>
 </mat-card>

@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { User } from '../../../core/models/user.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-user-list',
-  imports: [AsyncPipe, MatCardModule],
+  imports: [AsyncPipe, MatCardModule, RouterLink],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })

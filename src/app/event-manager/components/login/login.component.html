@@ -3,7 +3,8 @@
 </div>
 
 <mat-card [formGroup]="form" class="main-form">
-    <mat-card-title>Connection</mat-card-title>
+    <div class="align-content">
+    <mat-card-title>Connexion</mat-card-title>
         <div class="form-row">
             <mat-form-field appearance="fill">
                 <mat-label>Username</mat-label>
@@ -18,8 +19,7 @@
                 <mat-error>Ce champ est requis</mat-error>
             </mat-form-field>
         </div>
-	<div class="align-content">
 		@if(loading){<mat-spinner color="primary" mode="indeterminate"></mat-spinner><br/>}
-		<button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading && !form.valid">Connexion</button>
+		<button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading && !form.valid">Se connecter</button>
 	</div>
 </mat-card>

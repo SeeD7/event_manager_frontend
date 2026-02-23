@@ -15,5 +15,9 @@
             <br/>
             <span>Email : {{ user.email }}</span>
         </mat-card-content>
+        <div class="actions">
+            <button [routerLink]="['admin/change-role', user.id.toString()]">Changer le rôle</button>
+            <button class="danger">Supprimer l'utilisateur</button>
+        </div>
     </mat-card>
 }

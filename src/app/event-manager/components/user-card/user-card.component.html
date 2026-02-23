@@ -1,0 +1,53 @@
+@if(user(); as user){
+    <div class="profile-container">
+
+        <h2>Mon Profil</h2>
+
+        <div class="profile-card">
+
+            <div class="info-row">
+            <span class="label">Prénom :</span>
+            <span>{{ user.firstName }}</span>
+            </div>
+
+            <div class="info-row">
+            <span class="label">Nom :</span>
+            <span>{{ user.lastName }}</span>
+            </div>
+
+            <div class="info-row">
+            <span class="label">Nom d'utilisateur :</span>
+            <span>{{ user.username }}</span>
+            </div>
+
+            <div class="info-row">
+            <span class="label">Email :</span>
+            <span>{{ user.email }}</span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">Rôle :</span>
+
+                @if (!editableRole()) {
+                    <span class="role">{{ user.role }}</span>
+                } @else {
+                    <select [value]="user.role">
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                    </select>
+                }
+            </div>
+
+        </div>
+
+        <div class="actions">
+            @if (editableRole()) {
+                <button (click)="roleChange.emit(user.role)">Mettre à jour le rôle</button>
+            } @else {
+                <button routerLink="/event-manager/profile/edit">Modifier mes informations</button>
+                <button routerLink="/event-manager/profile/change-password" class="secondary">Changer mot de passe</button>
+            }
+        </div>
+
+    </div>
+}
