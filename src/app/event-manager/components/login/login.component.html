@@ -1,0 +1,25 @@
+<div class="alert alert-danger" [hidden]="!error">
+	There was a problem logging in. Please try again.
+</div>
+
+<mat-card [formGroup]="form" class="main-form">
+    <div class="align-content">
+    <mat-card-title>Connexion</mat-card-title>
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput formControlName="username">
+                <mat-error>Ce champ est requis</mat-error>
+            </mat-form-field>
+		</div>
+		<div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Mot de passe</mat-label>
+                <input type="password" matInput formControlName="password">
+                <mat-error>Ce champ est requis</mat-error>
+            </mat-form-field>
+        </div>
+		@if(loading){<mat-spinner color="primary" mode="indeterminate"></mat-spinner><br/>}
+		<button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading && !form.valid">Se connecter</button>
+	</div>
+</mat-card>

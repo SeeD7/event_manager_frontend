@@ -1,0 +1,19 @@
+<mat-toolbar color="tertiary">
+  <span class="logo">ZerOmus Corp</span>
+
+  <a routerLink="/event-manager">Event Manager</a>
+
+  @if(authenticatorService.user() && authenticatorService.user()?.role === "ADMIN"){
+    <a routerLink="/event-manager/users">Liste des utilisateurs</a>
+  }
+
+  <span class="spacer"></span>
+
+  @if(!authenticatorService.authenticated()){
+    <a routerLink="/event-manager/inscription">S'inscrire</a>
+    <a routerLink="/event-manager/auth/login">Se connecter</a>
+  } @else {
+    <a routerLink="/event-manager/profile">Mon profil</a>
+    <a (click)="logout()" (keyup.enter)="logout()" tabindex="0">Se déconnecter</a>
+  }
+</mat-toolbar>
