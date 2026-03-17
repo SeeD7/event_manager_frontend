@@ -1,0 +1,9 @@
+
+@let user = selectedUser();
+
+@if (user) {
+    <app-user-form [user]="user" [editProfile]="true" (submitForm)="updateProfile($event)"/>
+}
+<div class="align-content">
+    @if(loading){<mat-spinner color="primary" mode="indeterminate"></mat-spinner><br/>}
+</div>

@@ -1,29 +1,28 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { debounceTime, filter, map, Observable, switchMap, tap } from 'rxjs';
 import { UsersService } from '../../services/users.service';
+import { debounceTime, filter, map, Observable, switchMap } from 'rxjs';
 import { confirmEqualValidator } from '../../../shared/validators/confirm-equal.validator';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
-import { AsyncPipe, CommonModule } from '@angular/common';
 import { User } from '../../../core/models/user.model';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { RoleEnum } from '../../../core/models/role.enum';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-sign-in',
-  imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatProgressSpinner, AsyncPipe, CommonModule],
-  templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.scss',
+  selector: 'app-user-form',
+  imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, AsyncPipe, CommonModule],
+  templateUrl: './user-form-component.html',
+  styleUrl: './user-form-component.scss',
 })
-export class SignInComponent implements OnInit {
+export class UserFormComponent  implements OnInit {
   private formBuilder = inject(FormBuilder);
   private usersService = inject(UsersService);
-  private router = inject(Router);
-  private toastr = inject(ToastrService);
+
+  user = input<User>(new User);
+  editProfile = input<boolean>(false);
+  submitForm = output<User>();
 
   mainForm!: FormGroup;
   personalInfoForm!: FormGroup;
@@ -32,6 +31,7 @@ export class SignInComponent implements OnInit {
   confirmEmailCtrl!: FormControl;
   emailForm!: FormGroup;
 
+  usernameCtrl!: FormControl;
   passwordCtrl!: FormControl;
   confirmPasswordCtrl!: FormControl;
   loginInfoForm!: FormGroup;
@@ -42,14 +42,12 @@ export class SignInComponent implements OnInit {
   showEmailError$!: Observable<boolean>;
   showPasswordError$!: Observable<boolean>;
 
-  loading = false;
-
   ngOnInit(): void {
     this.initFormControls();
     this.initMainForm();
     this.initFormObservables();
-    this.setupAsyncValidator(this.emailCtrl, value => this.usersService.checkEmail(value), 'emailExists');
-    this.setupAsyncValidator(this.loginInfoForm.get('username')!, value => this.usersService.checkUsername(value), 'userExists');
+    this.setupAsyncValidator(this.emailCtrl, value => this.usersService.checkEmail(value), 'emailExists', this.user().email);
+    this.setupAsyncValidator(this.loginInfoForm.get('username')!, value => this.usersService.checkUsername(value), 'userExists', this.user().username);
   }
 
   private initMainForm(): void {
@@ -62,12 +60,12 @@ export class SignInComponent implements OnInit {
 
   private initFormControls(): void {
     this.personalInfoForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: [this.editProfile() ? this.user().firstName : '', Validators.required],
+      lastName: [this.editProfile() ? this.user().lastName : '', Validators.required],
     });
 
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.confirmEmailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
+    this.emailCtrl = this.formBuilder.control(this.editProfile() ? this.user().email : '', [Validators.required, Validators.email]);
+    this.confirmEmailCtrl = this.formBuilder.control(this.editProfile() ? this.user().email : '', [Validators.required, Validators.email]);
 
     this.emailForm = this.formBuilder.group({
       email: this.emailCtrl,
@@ -77,35 +75,44 @@ export class SignInComponent implements OnInit {
       updateOn: 'blur'
     });
 
-    this.passwordCtrl = this.formBuilder.control('', Validators.required);
-    this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
-    this.loginInfoForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: this.passwordCtrl,
-      confirmPassword: this.confirmPasswordCtrl,
-    }, {
-      validators: [confirmEqualValidator('password', 'confirmPassword')],
-      updateOn: 'blur'
-    });
+    this.usernameCtrl = this.formBuilder.control(this.editProfile() ? this.user().username : '', Validators.required);
+
+    if(this.editProfile()){
+      this.loginInfoForm = this.formBuilder.group({username: this.usernameCtrl});
+    } else {
+      this.passwordCtrl = this.formBuilder.control('', Validators.required);
+      this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
+      this.loginInfoForm = this.formBuilder.group({
+        username: this.usernameCtrl,
+        password: this.passwordCtrl,
+        confirmPassword: this.confirmPasswordCtrl,
+      }, {
+        validators: [confirmEqualValidator('password', 'confirmPassword')],
+        updateOn: 'blur'
+      });
+    }
   }
 
   private initFormObservables() {
     this.showEmailError$ = this.emailForm.statusChanges.pipe(
       map(status => status === 'INVALID' && this.emailCtrl.value && this.confirmEmailCtrl.value && this.emailForm.hasError('confirmEqual'))
     );
-    this.showPasswordError$ = this.loginInfoForm.statusChanges.pipe(
-      map(status => status === 'INVALID' && this.passwordCtrl.value && this.confirmPasswordCtrl.value && this.loginInfoForm.hasError('confirmEqual'))
-    );
+    if(!this.editProfile()){
+      this.showPasswordError$ = this.loginInfoForm.statusChanges.pipe(
+        map(status => status === 'INVALID' && this.passwordCtrl.value && this.confirmPasswordCtrl.value && this.loginInfoForm.hasError('confirmEqual'))
+      );
+    }
   }
 
   private setupAsyncValidator(
     control: AbstractControl,
     checkFn: (value: string) => Observable<boolean>,
-    errorKey: string
+    errorKey: string,
+    userValue: string,
   ) {
     control.valueChanges.pipe(
       debounceTime(500),
-      filter(() => control.valid && control.dirty),
+      filter(value => control.valid && control.dirty && this.editProfile() && value !== userValue),
       switchMap(value => checkFn(value)),
     ).subscribe(exists => {
       if (exists) {
@@ -118,7 +125,6 @@ export class SignInComponent implements OnInit {
   }
 
   getFormControlErrorText(ctrl: AbstractControl) {
-    console.log(ctrl.errors);
     if (ctrl.hasError('required')) {
       return 'Ce champ est requis';
     } else if (ctrl.hasError('email')) {
@@ -133,29 +139,22 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.loading = true;
     const user = new User();
 
     user.firstName = this.personalInfoForm.get('firstName')?.value;
     user.lastName = this.personalInfoForm.get('lastName')?.value;
     user.username = this.loginInfoForm.get('username')?.value;
-    user.role = RoleEnum.USER;
+
     user.email = this.emailCtrl.value;
-    user.password = this.passwordCtrl.value;
+    if(!this.editProfile()){
+      user.password = this.passwordCtrl.value;
+      user.role = RoleEnum.USER;
+    } else {
+      user.id = this.user().id;
+      user.password = this.user().password;
+      user.role = this.user().role;
+    }
     
-    this.usersService
-      .createUser(user)
-      .pipe(
-        tap((saved) => {
-          this.loading = false;
-          if (saved) {
-            this.mainForm.reset();
-            this.toastr.success('Inscription réussie ! Bienvenue !', 'Success');
-            this.router.navigateByUrl('/event-manager/auth/login');
-          } else {
-            this.toastr.error('Echec de l\'inscription.', 'Error');
-          }
-        }),
-      ).subscribe();
+    this.submitForm.emit(user);
   }
 }

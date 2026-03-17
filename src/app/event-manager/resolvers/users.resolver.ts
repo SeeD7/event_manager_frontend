@@ -3,12 +3,13 @@ import { Resolve } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { Observable } from 'rxjs';
 import { User } from '../../core/models/user.model';
+import { Page } from '../../core/models/page.model';
 
 @Injectable()
-export class UsersResolver implements Resolve<User[]> {
+export class UsersResolver implements Resolve<Page<User>> {
   private usersService = inject(UsersService);
 
-  resolve(): Observable<User[]> {
-    return this.usersService.getUsers();
+  resolve(): Observable<Page<User>> {
+    return this.usersService.getUsers(0, 10);
   }
 }

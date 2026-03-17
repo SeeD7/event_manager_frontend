@@ -4,10 +4,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { User } from '../../../core/models/user.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-card',
-  imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, RouterLink],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })
@@ -18,8 +19,10 @@ export class UserCardComponent implements OnInit {
   roleChange = output<string>();
 
   ngOnInit(): void {
+    console.log();
   }
 
   onSubmitForm() {
+    console.log();
   }
 }

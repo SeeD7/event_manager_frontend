@@ -1,10 +1,10 @@
 import { Component, computed, inject } from '@angular/core';
 import { AuthenticatorService } from '../../../core/service/authenticator.service';
-import { UserCardComponent } from "../user-card/user-card.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
-  imports: [UserCardComponent],
+  imports: [RouterLink],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',
 })
