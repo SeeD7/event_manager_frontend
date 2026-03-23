@@ -9,12 +9,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-user-form',
   imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, AsyncPipe, CommonModule],
-  templateUrl: './user-form-component.html',
-  styleUrl: './user-form-component.scss',
+  templateUrl: './user-form.component.html',
+  styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent  implements OnInit {
   private formBuilder = inject(FormBuilder);
@@ -80,7 +81,7 @@ export class UserFormComponent  implements OnInit {
     if(this.editProfile()){
       this.loginInfoForm = this.formBuilder.group({username: this.usernameCtrl});
     } else {
-      this.passwordCtrl = this.formBuilder.control('', Validators.required);
+      this.passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.pattern(environment.passwordRegex)]);
       this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
       this.loginInfoForm = this.formBuilder.group({
         username: this.usernameCtrl,
@@ -133,7 +134,9 @@ export class UserFormComponent  implements OnInit {
       return "L'email est déjà utilisé";
     } else if (ctrl.hasError('userExists')) {
       return "Le nom d'utilisateur est déjà utilisé";
-    } else {
+    } else if (ctrl.hasError('pattern')) {
+      return "Le mot de passe doit faire entre 8 et 36 caractères et doit contenir une minuscule, une majuscule, un chiffre et un caractère spécial (@#$%^&+=)";
+    }else {
       return 'Ce champ contient une erreur';
     }
   }

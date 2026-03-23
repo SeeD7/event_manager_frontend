@@ -41,11 +41,11 @@
             <mat-error>{{ getFormControlErrorText(usernameCtrl) }}</mat-error>
         </mat-form-field>
         @if(!editProfile()){
-            <div class="form-row">
+            <div class="form-row extra-space">
                 <mat-form-field appearence="fill">
                     <mat-label>Mot de passe</mat-label>
                     <input type="password" matInput formControlName="password">
-                    <mat-error>Ce champ est requis</mat-error>
+                    <mat-error>{{ getFormControlErrorText(passwordCtrl) }}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearence="fill">
                     <mat-label>Confirmer votre mot de passe</mat-label>
@@ -54,7 +54,7 @@
                 </mat-form-field>
             </div>
             @if(showPasswordError$ | async){
-                <small class="error-text">Les deux mots de passe ne correspondent pas</small>
+                <mat-error>Les deux mots de passe ne correspondent pas</mat-error>
             }
         }
     </mat-card>

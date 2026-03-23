@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { UserFormComponent } from "../user-form/user-form-component";
+import { UserFormComponent } from "../user-form/user-form.component";
 import { User } from '../../../core/models/user.model';
 import { UsersService } from '../../services/users.service';
 import { tap } from 'rxjs';
@@ -9,10 +9,10 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { AuthenticatorService } from '../../../core/service/authenticator.service';
 
 @Component({
-  selector: 'app-update-user-component',
+  selector: 'app-update-user',
   imports: [UserFormComponent, MatProgressSpinner],
-  templateUrl: './update-user-component.html',
-  styleUrl: './update-user-component.scss',
+  templateUrl: './update-user.component.html',
+  styleUrl: './update-user.component.scss',
 })
 export class UpdateUserComponent {
   private usersService = inject(UsersService);
@@ -25,7 +25,6 @@ export class UpdateUserComponent {
   loading = false;
 
   updateProfile(user: User) {
-    console.log('Let\' go !');
     this.usersService
       .updateUser(user.id, user)
       .pipe(
@@ -35,7 +34,7 @@ export class UpdateUserComponent {
             this.toastr.success('Profil mis à jour avec succés !', 'Success');
             this.router.navigateByUrl('/event-manager/profile');
           } else {
-            this.toastr.error('Echec de a mis à jour.', 'Error');
+            this.toastr.error('Echec de la mis à jour.', 'Error');
           }
         }),
       ).subscribe();

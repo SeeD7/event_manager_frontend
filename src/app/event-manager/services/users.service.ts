@@ -54,5 +54,11 @@ export class UsersService {
     deleteUser(id: number): Observable<User> {
         return this.http.delete<User>(`${environment.apiUrl}/user/${id}`, { withCredentials: true });
     }
+
+    updatePassword(id: number, password: string): Observable<User> {
+        const params = new HttpParams()
+            .set('password', password);
+        return this.http.put<User>(`${environment.apiUrl}/user/password/${id}`, null, { params: params, withCredentials: true });
+    }
     
 }

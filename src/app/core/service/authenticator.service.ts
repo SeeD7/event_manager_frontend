@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { catchError, of, tap } from 'rxjs';
 import { User } from '../../core/models/user.model';
@@ -17,6 +17,7 @@ export class AuthenticatorService {
   authenticate(
     credentials: { username: string; password: string } | undefined,
     callback?: () => void,
+    errorCallback?: (err: HttpErrorResponse) => void
   ): void {
     const body = new URLSearchParams();
     body.set('username', credentials!.username);
@@ -36,6 +37,9 @@ export class AuthenticatorService {
             callback();
           }
         },
+        error: (err) => {
+          if (errorCallback) errorCallback(err); // On prévient le composant
+        }
       });
   }
 

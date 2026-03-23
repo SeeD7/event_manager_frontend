@@ -6,7 +6,7 @@ import { AdminGuard } from '../core/guards/admin.guard';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { UserListComponent } from './components/admin/user-list/user-list.component';
-import { UpdateUserComponent } from './components/update-user-component/update-user-component';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 const routes: Routes = [
   { path: '', component: FrontPageComponent },
