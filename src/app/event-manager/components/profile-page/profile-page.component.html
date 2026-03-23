@@ -1,3 +1,40 @@
-@if (user(); as user) {
-  <app-user-card [user]="user" />
+@if(user(); as user){
+  <div class="profile-container">
+
+      <h2>Mon Profil</h2>
+
+      <div class="profile-card">
+
+          <div class="info-row">
+          <span class="label">Prénom :</span>
+          <span>{{ user.firstName }}</span>
+          </div>
+
+          <div class="info-row">
+          <span class="label">Nom :</span>
+          <span>{{ user.lastName }}</span>
+          </div>
+
+          <div class="info-row">
+          <span class="label">Nom d'utilisateur :</span>
+          <span>{{ user.username }}</span>
+          </div>
+
+          <div class="info-row">
+          <span class="label">Email :</span>
+          <span>{{ user.email }}</span>
+          </div>
+
+          <div class="info-row">
+              <span class="label">Rôle :</span>
+              <span class="role">{{ user.role }}</span>
+          </div>
+
+      </div>
+
+      <div class="actions">
+          <button routerLink="/event-manager/profile/edit">Modifier mes informations</button>
+          <button (click)="changePassword()" class="secondary">Changer mot de passe</button>
+      </div>
+  </div>
 }

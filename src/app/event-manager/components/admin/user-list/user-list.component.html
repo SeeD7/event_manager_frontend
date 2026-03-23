@@ -1,0 +1,15 @@
+<h2>Utilisateurs</h2>
+
+<div class="table-wrapper">
+    @let users = users$ | async;
+    @if (users) {
+        <app-users-table [pageUser]="users" (edit)="editRow($event)" (delete)="deleteRow($event)" (loadUsers)="loadFromChild($event)"/>
+    }
+
+    @let loading = loading$ | async;
+    @if(loading){
+        <div class="spinner-overlay">
+            <mat-spinner color="primary" mode="indeterminate"></mat-spinner>
+        </div>
+    }
+</div>

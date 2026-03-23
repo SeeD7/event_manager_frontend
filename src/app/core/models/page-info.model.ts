@@ -1,0 +1,6 @@
+export class PageInfo {
+  size = 10;
+  number = 0;
+  totalElements = 0;
+  totalPages = 0;
+}
