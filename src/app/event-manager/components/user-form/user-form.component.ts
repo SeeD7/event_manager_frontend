@@ -1,7 +1,7 @@
 import { Component, inject, input, OnInit, output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
-import { debounceTime, filter, map, Observable, switchMap } from 'rxjs';
+import { debounceTime, filter, map, Observable, switchMap, tap } from 'rxjs';
 import { confirmEqualValidator } from '../../../shared/validators/confirm-equal.validator';
 import { User } from '../../../core/models/user.model';
 import { RoleEnum } from '../../../core/models/role.enum';
@@ -113,7 +113,7 @@ export class UserFormComponent  implements OnInit {
   ) {
     control.valueChanges.pipe(
       debounceTime(500),
-      filter(value => control.valid && control.dirty && this.editProfile() && value !== userValue),
+      filter(value => control.valid && control.dirty && (!this.editProfile() || value !== userValue)),
       switchMap(value => checkFn(value)),
     ).subscribe(exists => {
       if (exists) {
