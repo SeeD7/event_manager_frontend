@@ -24,14 +24,12 @@ export class UsersTableComponent implements OnChanges {
     if (this.pageUser) {
       this.dataSource = [...this.pageUser.content];
       this.pageInfo = {...this.pageUser.page};
-
     queueMicrotask(() => {
-    if (!this.paginator) return;
-
-    this.paginator.length = this.pageUser.page.totalElements;
-    this.paginator.pageIndex = this.pageUser.page.number;
-    this.paginator.pageSize = this.pageUser.page.size;
-  });
+      if (!this.paginator) return;
+        this.paginator.length = this.pageUser.page.totalElements;
+        this.paginator.pageIndex = this.pageUser.page.number;
+        this.paginator.pageSize = this.pageUser.page.size;
+      });
     }
   }
 
