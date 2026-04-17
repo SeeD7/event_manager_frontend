@@ -5,16 +5,26 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { Page } from '../../core/models/page.model';
 import { RoleEnum } from '../../core/models/role.enum';
+import { SearchUser } from '../../core/models/search.user.model';
 
 @Injectable()
 export class UsersService {
     private http = inject(HttpClient);
 
-    getUsers(page: number, size: number): Observable<Page<User>> {
-        const params = new HttpParams()
+    getUsers(search: SearchUser, page: number, size: number): Observable<Page<User>> {
+        console.log("On viens ici avec un search : " + search);
+        let params = new HttpParams()
             .set('page', page.toString())
             .set('size', size.toString())
             .set('sort', "id");
+        if (search) {
+        Object.entries(search).forEach(([key, value]) => {
+            // On n'ajoute que si la valeur n'est pas vide/null
+            if (value !== null && value !== undefined && value !== '') {
+                params = params.set(key, value.toString());
+            }
+        });
+    }
         return this.http.get<Page<User>>(`${environment.apiUrl}/users`, { params: params, withCredentials: true });
     }
 

@@ -9,6 +9,7 @@ import { RoleEnum } from '../../../../core/models/role.enum';
 import { BehaviorSubject, finalize, of, switchMap } from 'rxjs';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { AsyncPipe } from '@angular/common';
+import { SearchUser } from '../../../../core/models/search.user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -22,12 +23,13 @@ export class UserListComponent implements OnInit {
 
   pageIndex = 0;
   pageSize = 10;
+  search = new SearchUser();
 
   private refresh$ = new BehaviorSubject<void>(undefined);
 
   users$ = this.refresh$.pipe(
     switchMap(() =>
-      this.usersService.getUsers(this.pageIndex, this.pageSize)
+      this.usersService.getUsers(this.search, this.pageIndex, this.pageSize)
     )
   );
 
@@ -71,10 +73,11 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  loadFromChild(value: {pageIndex: number, pageSize: number}){
-      this.pageIndex = value.pageIndex;
-      this.pageSize = value.pageSize;
-      this.loadUsers();
+  loadFromChild(value: {search: SearchUser, pageIndex: number, pageSize: number}){
+    this.search = value.search;
+    this.pageIndex = value.pageIndex;
+    this.pageSize = value.pageSize;
+    this.loadUsers();
   }
 
   loadUsers() {

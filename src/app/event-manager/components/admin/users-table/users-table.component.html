@@ -1,19 +1,71 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
 
-  <!-- Colonnes dynamiques sauf actions -->
-  @for (column of columnsToDisplay; track column; let index = $index) {
-    @if (column !== 'actions') {
-      <ng-container [matColumnDef]="column">
-        <th mat-header-cell *matHeaderCellDef>{{ headersColumns[$index] }}</th>
-        <td mat-cell *matCellDef="let user">{{ user[column] }}</td>
-      </ng-container>
-    }
-  }
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef>
+      <div class="header-container">
+        <span>Prénom</span>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input matInput [formControl]='firstNameCtrl' placeholder="Filtrer...">
+        </mat-form-field>
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let user">{{ user.firstName }}</td>
+  </ng-container>
 
-  <!-- Colonne Actions -->
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef>
+      <div class="header-container">
+        <span>Nom</span>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input matInput [formControl]='lastNameCtrl' placeholder="Filtrer...">
+        </mat-form-field>
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let user">{{ user.lastName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef>
+      <div class="header-container">
+        <span>Nom d'utilisateur</span>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <input matInput [formControl]='usernameCtrl' placeholder="Filtrer...">
+        </mat-form-field>
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef>
+      <div class="header-container">
+        <span>Rôle</span>
+        <mat-form-field class="role" appearance="outline" subscriptSizing="dynamic">
+          <mat-select [formControl]='roleCtrl' multiple>
+            @for (role of roleOptions; track role) {
+              <mat-option [value]="role">{{ role }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>
+      <div class="header-container">
+        <span>Email</span>
+        <mat-form-field class="email" appearance="outline" subscriptSizing="dynamic">
+          <input matInput [formControl]='emailCtrl' placeholder="Filtrer...">
+        </mat-form-field>
+      </div>
+    </th>
+    <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
-
     <td mat-cell *matCellDef="let user">
       <button mat-button (click)="edit.emit(user)">
         <mat-icon class="grey">settings</mat-icon>
@@ -30,4 +82,4 @@
 
 </table>
 <mat-paginator #paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons
-  (page)="onPageChange($event)">></mat-paginator>
+  (page)="onPageChange($event)"></mat-paginator>
