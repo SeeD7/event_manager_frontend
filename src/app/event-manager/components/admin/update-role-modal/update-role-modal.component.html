@@ -1,0 +1,26 @@
+<form [formGroup]="form">
+    <div class="container">
+    <h2 mat-dialog-title>Mise à jour du rôle</h2>
+
+    <p class="description">
+        Quel rôle souhaitez-vous associer à
+        <strong>{{ data.firstName }} {{ data.lastName }}</strong> ?
+    </p>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Rôle</mat-label>
+        <mat-select formControlName="role">
+        @for (item of roles | keyvalue; track $index) {
+            <mat-option [value]="item.value">
+            {{ item.key }}
+            </mat-option>
+        }
+        </mat-select>
+    </mat-form-field>
+
+    <div class="actions">
+        <button mat-flat-button color="primary" (click)="validate()">Mettre à jour</button>
+        <button mat-stroked-button class="danger" (click)="cancel()">Annuler</button>
+    </div>
+    </div>
+</form>

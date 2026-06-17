@@ -1,0 +1,73 @@
+<!--<mat-toolbar color="tertiary">
+  <span class="logo">ZerOmus Corp</span>
+
+  <a routerLink="/event-manager">Event Manager</a>
+
+  @if(authenticatorService.user() && authenticatorService.user()?.role === "ADMIN"){
+    <a routerLink="/event-manager/users">Liste des utilisateurs</a>
+  }
+
+  <span class="spacer"></span>
+
+  @if(!authenticatorService.authenticated()){
+    <a routerLink="/event-manager/inscription">S'inscrire</a>
+    <a routerLink="/event-manager/auth/login">Se connecter</a>
+  } @else {
+    <a routerLink="/event-manager/profile">Mon profil</a>
+    <a (click)="logout()" (keyup.enter)="logout()" tabindex="0">Se déconnecter</a>
+  }
+</mat-toolbar>-->
+<mat-toolbar class="custom-header">
+  <div class="header-left">
+    <a routerLink="/" class="brand-logo corp-logo">
+      <svg viewBox="0 0 100 40" class="svg-logo">
+        <defs>
+          <linearGradient id="zeromusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#9C27B0" />
+            <stop offset="100%" stop-color="#00E5FF" />
+          </linearGradient>
+        </defs>
+        <path d="M10,35 L25,5 L40,35 L30,35 L25,18 L20,35 Z" fill="url(#zeromusGrad)" />
+        <circle cx="25" cy="28" r="3" fill="#00E5FF" class="core-glow" />
+      </svg>
+      <span class="corp-title">ZerOmus <span class="accent-text">Corp</span></span>
+    </a>
+
+    <span class="separator">|</span>
+
+    <a routerLink="/" class="brand-logo app-logo">
+      <mat-icon class="app-icon">festival</mat-icon>
+      <span class="app-title">Event Manager</span>
+    </a>
+
+    <nav class="nav-links">
+      @if(authenticatorService.authenticated()){
+        <button mat-button routerLink="/events/add" routerLinkActive="active-link">
+          <mat-icon inline>add_circle_outline</mat-icon> Ajouter un événement
+        </button>
+        <button mat-button routerLink="/agenda" routerLinkActive="active-link">
+          <mat-icon inline>calendar_month</mat-icon> Voir l'agenda
+        </button>
+      }
+      
+      @if(authenticatorService.user() && authenticatorService.user()?.role === "ADMIN"){
+        <button mat-button color="warn" routerLink="/event-manager/users" routerLinkActive="active-link" class="admin-link">
+          <mat-icon inline>admin_panel_settings</mat-icon> Gestion Utilisateurs
+        </button>
+      }
+    </nav>
+  </div>
+
+  <div class="header-right">
+    @if(!authenticatorService.authenticated()){
+      <ng-container>
+        <button mat-button routerLink="/event-manager/inscription" class="auth-btn">S'inscrire</button>
+        <button mat-raised-button color="primary" routerLink="/event-manager/auth/login" class="login-btn">Se connecter</button>
+      </ng-container>
+    } @else {
+      <button mat-button routerLink="/event-manager/profile" class="auth-btn">Mon profil</button>
+      <button mat-raised-button color="primary" (click)="logout()" (keyup.enter)="logout()" class="login-btn">Se déconnecter</button>
+  }
+
+    </div>
+</mat-toolbar>

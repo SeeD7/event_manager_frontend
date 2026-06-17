@@ -1,0 +1,38 @@
+<mat-card class="main-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmitForm()" class="align-content">
+        <mat-card-title>Connexion</mat-card-title>
+        
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput formControlName="username">
+                <mat-error>Ce champ est requis</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Mot de passe</mat-label>
+                <input type="password" matInput formControlName="password">
+                <mat-error>Ce champ est requis</mat-error>
+            </mat-form-field>
+        </div>
+
+        @let loading = loading$ | async;
+        @if(loading){
+            <div class="spinner-overlay">
+                <mat-spinner color="primary" mode="indeterminate"></mat-spinner>
+            </div>
+        }
+        @if (error === "authentication") {
+            <mat-error> Problème d'authentification, vérifiez vos identifiants </mat-error>
+        }
+        @if (error === "other") {
+            <mat-error> Problème réseau, veuillez réessayer </mat-error>
+        }
+
+        <button type="submit" mat-flat-button color="primary" [disabled]="loading || !form.valid">
+            Se connecter
+        </button>
+    </form>
+</mat-card>
