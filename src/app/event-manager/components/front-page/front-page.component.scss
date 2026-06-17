@@ -1,3 +1,83 @@
-h2 {
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.text-center {
   text-align: center;
+}
+
+.hero-section {
+  .hero-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    color: #3f51b5; /* Ou ta couleur primaire */
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+}
+
+.intro-section {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+
+  .feature-card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 360px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+}
+
+.green-icon {
+  color: #4caf50;
+}
+
+.actions-section {
+  margin-top: 20px;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+
+  h3 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }

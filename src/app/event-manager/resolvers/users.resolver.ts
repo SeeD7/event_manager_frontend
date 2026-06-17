@@ -4,12 +4,13 @@ import { UsersService } from '../services/users.service';
 import { Observable } from 'rxjs';
 import { User } from '../../core/models/user.model';
 import { Page } from '../../core/models/page.model';
+import { SearchUser } from '../../core/models/search.user.model';
 
 @Injectable()
 export class UsersResolver implements Resolve<Page<User>> {
   private usersService = inject(UsersService);
 
   resolve(): Observable<Page<User>> {
-    return this.usersService.getUsers(0, 10);
+    return this.usersService.getUsers(new SearchUser, 0, 10);
   }
 }

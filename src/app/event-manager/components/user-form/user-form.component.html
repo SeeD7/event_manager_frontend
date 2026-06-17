@@ -30,7 +30,7 @@
             </mat-form-field>
         </div>
         @if(showEmailError$ | async){
-            <small class="error-text">Les deux adresses ne correspondent pas</small>
+            <mat-error>Les deux adresses ne correspondent pas</mat-error>
         }
     </mat-card>
     <mat-card class="form-card" [formGroup]="loginInfoForm">

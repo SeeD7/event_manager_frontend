@@ -25,10 +25,10 @@
             </div>
         }
         @if (error === "authentication") {
-            <mat-error> Problème d'authentification, vérifiez vos identifiants</mat-error>
+            <mat-error> Problème d'authentification, vérifiez vos identifiants </mat-error>
         }
         @if (error === "other") {
-            <mat-error> Problème d'authentification, veuillez réessayer</mat-error>
+            <mat-error> Problème réseau, veuillez réessayer </mat-error>
         }
 
         <button type="submit" mat-flat-button color="primary" [disabled]="loading || !form.valid">

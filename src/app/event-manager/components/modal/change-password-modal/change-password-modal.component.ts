@@ -42,7 +42,6 @@ export class ChangePasswordModalComponent implements OnInit {
     this.showPasswordError$ = this.form.statusChanges.pipe(
       map(status => status === 'INVALID' && this.passwordCtrl.value && this.confirmPasswordCtrl.value && this.form.hasError('confirmEqual'))
     );
-
   }
 
   passwordMatchValidator(group: AbstractControl): ValidationErrors | null {
