@@ -78,7 +78,7 @@ export class UsersTableComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    if (this.pageUser) {
+    if (this.pageUser && this.pageUser.page) {
       this.dataSource = [...this.pageUser.content];
       this.pageInfo = {...this.pageUser.page};
     queueMicrotask(() => {

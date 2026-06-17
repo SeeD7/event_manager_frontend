@@ -1,7 +1,131 @@
-.spacer {
-  flex: 1;
+.custom-header {
+  background-color: #120E16 !important; /* Fond sombre mystique */
+  color: #E0E0E0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(156, 39, 176, 0.2);
 }
 
-a {
-    margin: 15px;
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Base des Logos */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+/* Style spécifique ZerOmus Corp */
+.corp-logo {
+  .svg-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 4px;
+  }
+  .corp-title {
+    font-family: 'Orbitron', 'Roboto', sans-serif; /* Un côté un peu tech/scifi si tu l'as */
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #BA68C8, #00E5FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.15);
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+/* Style spécifique Event Manager */
+.app-logo {
+  gap: 8px;
+  .app-icon {
+    color: #00E5FF; /* Cyan électrique */
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+  }
+  .app-title {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #E0E0E0;
+  }
+}
+
+/* Navigation centrale */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-left: 16px;
+
+  button {
+    color: rgba(224, 224, 224, 0.7);
+    font-size: 0.9rem;
+    
+    mat-icon {
+      margin-right: 4px;
+    }
+
+    &:hover {
+      color: #00E5FF;
+      background: rgba(0, 229, 255, 0.05);
+    }
+  }
+
+  .active-link {
+    color: #00E5FF !important;
+    border-bottom: 2px solid #00E5FF;
+    border-radius: 0;
+  }
+
+  .admin-link {
+    &:hover {
+      color: #f44336;
+      background: rgba(244, 67, 54, 0.05);
+    }
+  }
+}
+
+/* Boutons de droite (Auth) */
+.login-btn {
+  background: linear-gradient(135deg, #9C27B0, #7B1FA2) !important;
+  color: white !important;
+  box-shadow: 0 4px 10px rgba(156, 39, 176, 0.3);
+
+  &:hover {
+    box-shadow: 0 4px 15px rgba(156, 39, 176, 0.6);
+  }
+}
+
+.auth-btn {
+  color: rgba(224, 224, 224, 0.8);
+  &:hover {
+    color: white;
+  }
+}
+
+/* Animation discrète sur le cœur de l'invocation */
+.core-glow {
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { r: 2.5; opacity: 0.6; }
+  100% { r: 3.5; opacity: 1; filter: drop-shadow(0 0 4px #00E5FF); }
 }
