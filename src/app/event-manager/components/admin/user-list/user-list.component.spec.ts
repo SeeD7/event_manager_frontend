@@ -1,14 +1,13 @@
-import { render, screen } from '@testing-library/angular';
+import { render } from '@testing-library/angular';
 import { UserListComponent } from './user-list.component';
 import '@testing-library/jest-dom';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { User } from '../../../../core/models/user.model';
 import { UsersService } from '../../../services/users.service';
-import { UpdateRoleModalComponent } from '../update-role-modal/update-role-modal.component';
 import { UsersTableComponent } from '../users-table/users-table.component';
-import { RoleEnum } from '../../../../core/models/role.enum';
 import { MatDialog } from '@angular/material/dialog';
+import { RoleEnum } from '../../../../core/models/business/role.enum';
+import { User } from '../../../../core/models/business/user.model';
 
 describe('UserListComponent', () => {
   // On crée un "Mock" du service

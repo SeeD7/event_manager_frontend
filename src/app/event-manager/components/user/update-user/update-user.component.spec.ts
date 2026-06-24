@@ -3,14 +3,13 @@ import { UpdateUserComponent } from './update-user.component';
 import '@testing-library/jest-dom';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UserFormComponent } from '../user-form/user-form.component';
-import { UsersService } from '../../services/users.service';
-import { User } from '../../../core/models/user.model';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { signal } from '@angular/core';
-import { AuthenticatorService } from '../../../core/service/authenticator.service';
+import { AuthenticatorService } from '../../../../core/service/authenticator.service';
+import { UsersService } from '../../../services/users.service';
 
 describe('UpdateUserComponent', () => {
   // On crée un "Mock" du service

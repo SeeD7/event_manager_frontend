@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/angular';
 import { LoginComponent } from './login.component';
-import { AuthenticatorService } from '../../../core/service/authenticator.service';
+import { AuthenticatorService } from '../../../../core/service/authenticator.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';

@@ -1,0 +1,44 @@
+.category-list-container {
+  padding: 24px;
+  max-width: 1200px;  // Centre le contenu sur les grands écrans
+  margin: 0 auto;     // Centre le bloc complet horizontalement
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  // On cible directement le bouton à l'intérieur de ce header
+  button[mat-raised-button] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px !important; // Ajuste si tes boutons d'actions sont plus grands ou petits
+
+    // On force l'alignement de l'icône "add" à l'intérieur
+    ::v-deep .mat-icon {
+      margin-right: 8px !important;
+      margin-left: -4px !important;
+      font-size: 20px !important;
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+}
+
+.table-wrapper {
+  position: relative; // Nécessaire pour que le spinner-overlay reste centré par-dessus le tableau
+  width: 100%;
+}
+
+.spinner-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 10;
+}

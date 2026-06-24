@@ -1,12 +1,12 @@
 import { Component, computed, inject } from '@angular/core';
 import { UserFormComponent } from "../user-form/user-form.component";
-import { User } from '../../../core/models/user.model';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../../services/users.service';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { AuthenticatorService } from '../../../core/service/authenticator.service';
+import { AuthenticatorService } from '../../../../core/service/authenticator.service';
+import { User } from '../../../../core/models/business/user.model';
 
 @Component({
   selector: 'app-update-user',

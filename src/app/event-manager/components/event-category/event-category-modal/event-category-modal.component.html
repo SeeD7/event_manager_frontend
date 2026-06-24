@@ -1,0 +1,26 @@
+<div class="container">
+  <h2> @if (!data){Créer} @else {Modifier} une catégorie d'évènement</h2>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="full-width largeError">
+      <mat-label>Nom de la catégorie</mat-label>
+      <input matInput formControlName="name" />
+      @if (form.get('name')?.hasError('required')) {
+        <mat-error>Champ requis</mat-error>
+      }
+      @if (form.get('name')?.hasError('alreadyExists')) {
+        <mat-error>Le nom de catégorie existe déjà</mat-error>
+      }
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="full-width largeError">
+      <mat-label>Icône de la catégorie</mat-label>
+      <input matInput formControlName="icon" />
+    </mat-form-field>
+  </form>
+
+  <div class="actions">
+    <button mat-button class="danger" (click)="cancel()">Annuler</button>
+    <button mat-raised-button color="primary" (click)="validate()" [disabled]="!form.valid">@if (!data){Créer} @else {Modifier}</button>
+  </div>
+</div>

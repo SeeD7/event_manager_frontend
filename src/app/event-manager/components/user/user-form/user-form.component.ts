@@ -1,15 +1,15 @@
 import { Component, inject, input, OnInit, output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UsersService } from '../../services/users.service';
 import { debounceTime, filter, map, Observable, switchMap, tap } from 'rxjs';
-import { confirmEqualValidator } from '../../../shared/validators/confirm-equal.validator';
-import { User } from '../../../core/models/user.model';
-import { RoleEnum } from '../../../core/models/role.enum';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
+import { UsersService } from '../../../services/users.service';
+import { User } from '../../../../core/models/business/user.model';
+import { confirmEqualValidator } from '../../../../shared/validators/confirm-equal.validator';
+import { RoleEnum } from '../../../../core/models/business/role.enum';
 
 @Component({
   selector: 'app-user-form',

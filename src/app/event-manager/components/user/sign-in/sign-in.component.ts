@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { tap } from 'rxjs';
-import { UsersService } from '../../services/users.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { User } from '../../../core/models/user.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserFormComponent } from '../user-form/user-form.component';
+import { UsersService } from '../../../services/users.service';
+import { User } from '../../../../core/models/business/user.model';
 
 @Component({
   selector: 'app-sign-in',

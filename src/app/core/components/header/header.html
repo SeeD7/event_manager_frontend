@@ -1,22 +1,3 @@
-<!--<mat-toolbar color="tertiary">
-  <span class="logo">ZerOmus Corp</span>
-
-  <a routerLink="/event-manager">Event Manager</a>
-
-  @if(authenticatorService.user() && authenticatorService.user()?.role === "ADMIN"){
-    <a routerLink="/event-manager/users">Liste des utilisateurs</a>
-  }
-
-  <span class="spacer"></span>
-
-  @if(!authenticatorService.authenticated()){
-    <a routerLink="/event-manager/inscription">S'inscrire</a>
-    <a routerLink="/event-manager/auth/login">Se connecter</a>
-  } @else {
-    <a routerLink="/event-manager/profile">Mon profil</a>
-    <a (click)="logout()" (keyup.enter)="logout()" tabindex="0">Se déconnecter</a>
-  }
-</mat-toolbar>-->
 <mat-toolbar class="custom-header">
   <div class="header-left">
     <a routerLink="/" class="brand-logo corp-logo">
@@ -53,6 +34,9 @@
       @if(authenticatorService.user() && authenticatorService.user()?.role === "ADMIN"){
         <button mat-button color="warn" routerLink="/event-manager/users" routerLinkActive="active-link" class="admin-link">
           <mat-icon inline>admin_panel_settings</mat-icon> Gestion Utilisateurs
+        </button>
+        <button mat-button color="warn" routerLink="/event-manager/event-categories" routerLinkActive="active-link" class="admin-link">
+          <mat-icon inline>admin_panel_settings</mat-icon> Gestion Catégories
         </button>
       }
     </nav>

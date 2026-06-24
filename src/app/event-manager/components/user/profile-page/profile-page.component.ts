@@ -1,11 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
-import { AuthenticatorService } from '../../../core/service/authenticator.service';
+import { AuthenticatorService } from '../../../../core/service/authenticator.service';
 import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangePasswordModalComponent } from '../modal/change-password-modal/change-password-modal.component';
-import { UsersService } from '../../services/users.service';
 import { catchError, EMPTY, filter, switchMap, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { UsersService } from '../../../services/users.service';
+import { ChangePasswordModalComponent } from '../../modal/change-password-modal/change-password-modal.component';
 
 @Component({
   selector: 'app-profile-page',

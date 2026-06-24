@@ -3,12 +3,12 @@ import { SignInComponent } from './sign-in.component';
 import '@testing-library/jest-dom';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UserFormComponent } from '../user-form/user-form.component';
-import { UsersService } from '../../services/users.service';
-import { User } from '../../../core/models/user.model';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { User } from '../../../../core/models/business/user.model';
+import { UsersService } from '../../../services/users.service';
 
 describe('Sign-InComponent', () => {
   // On crée un "Mock" du service

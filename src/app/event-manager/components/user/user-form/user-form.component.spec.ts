@@ -1,15 +1,15 @@
 import { render, screen, fireEvent } from '@testing-library/angular';
 import { UserFormComponent } from './user-form.component';
 import '@testing-library/jest-dom';
-import { UsersService } from '../../services/users.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { of } from 'rxjs';
-import { User } from '../../../core/models/user.model';
-import { RoleEnum } from '../../../core/models/role.enum';
+import { User } from '../../../../core/models/business/user.model';
+import { RoleEnum } from '../../../../core/models/business/role.enum';
+import { UsersService } from '../../../services/users.service';
 
 describe('Sign-InComponent', () => {
   // On crée un "Mock" du service

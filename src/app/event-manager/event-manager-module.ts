@@ -15,6 +15,7 @@ import { UsersResolver } from './resolvers/users.resolver';
   providers: [
     UsersService, 
     UsersResolver,
+    EventManagerModule
   ]
 })
 export class EventManagerModule { }

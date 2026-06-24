@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { catchError, of, tap } from 'rxjs';
-import { User } from '../../core/models/user.model';
+import { User } from '../models/business/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticatorService {

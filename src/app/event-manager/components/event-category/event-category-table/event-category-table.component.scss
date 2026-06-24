@@ -1,0 +1,48 @@
+.category-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-actions h1 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+.action-header {
+  text-align: center;
+}
+
+td.mat-column-actions {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.empty-cell {
+  text-align: center;
+  padding: 40px !important;
+  color: #757575;
+  font-style: italic;
+}
+
+button mat-icon {
+  margin-right: 4px;
+}

@@ -1,11 +1,9 @@
 import { Component, inject, Input, OnChanges, OnDestroy, output, ViewChild } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { User } from '../../../../core/models/user.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Page } from '../../../../core/models/page.model';
-import { RoleEnum } from '../../../../core/models/role.enum';
 import { CommonModule } from '@angular/common';
 import { PageInfo } from '../../../../core/models/page-info.model';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,7 +12,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
-import { SearchUser } from '../../../../core/models/search.user.model';
+import { User } from '../../../../core/models/business/user.model';
+import { RoleEnum } from '../../../../core/models/business/role.enum';
+import { SearchUser } from '../../../../core/models/search/search.user.model';
 
 @Component({
   selector: 'app-users-table',

@@ -1,4 +1,4 @@
-import { RoleEnum } from "./role.enum";
+import { RoleEnum } from "../business/role.enum";
 
 export class SearchUser {
     firstName?: string;
