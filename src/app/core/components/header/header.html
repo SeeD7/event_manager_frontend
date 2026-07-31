@@ -23,10 +23,10 @@
 
     <nav class="nav-links">
       @if(authenticatorService.authenticated()){
-        <button mat-button routerLink="/events/add" routerLinkActive="active-link">
+        <button mat-button routerLink="/event-manager/events/add" routerLinkActive="active-link">
           <mat-icon inline>add_circle_outline</mat-icon> Ajouter un événement
         </button>
-        <button mat-button routerLink="/agenda" routerLinkActive="active-link">
+        <button mat-button routerLink="/event-manager/agenda" routerLinkActive="active-link">
           <mat-icon inline>calendar_month</mat-icon> Voir l'agenda
         </button>
       }

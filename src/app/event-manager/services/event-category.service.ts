@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Page } from '../../core/models/page.model';
 import { Observable } from 'rxjs';
-import { EventCategory } from '../../core/models/business/event-category.model';
+import { EventCategory, EventCategoryLight } from '../../core/models/business/event-category.model';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -19,6 +19,10 @@ export class EventCategoryService {
       .set('size', size.toString())
       .set('sort', "id");
     return this.http.get<Page<EventCategory>>(`${environment.apiUrl}${this.route}/paged`, { params: params, withCredentials: true });
+  }
+
+  getAllEventCategories(): Observable<EventCategoryLight[]> {
+    return this.http.get<EventCategoryLight[]>(`${environment.apiUrl}${this.route}`, { withCredentials: true });
   }
 
   getEventCategoryById(id: number): Observable<EventCategory> {

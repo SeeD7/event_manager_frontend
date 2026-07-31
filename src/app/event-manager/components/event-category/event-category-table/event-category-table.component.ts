@@ -1,4 +1,4 @@
-import { Component, computed, inject, Input, OnChanges, OnDestroy, output, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, output, ViewChild } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -9,15 +9,10 @@ import { PageInfo } from '../../../../core/models/page-info.model';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { catchError, debounceTime, EMPTY, filter, Subscription, switchMap, tap } from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { EventCategory } from '../../../../core/models/business/event-category.model';
-import { MatDialog } from '@angular/material/dialog';
-import { EventCategoryModalComponent } from '../event-category-modal/event-category-modal.component';
-import { ToastrService } from 'ngx-toastr';
-import { EventCategoryService } from '../../../services/event-category.service';
-import { AuthenticatorService } from '../../../../core/service/authenticator.service';
 
 @Component({
   selector: 'app-event-category-table',
@@ -25,7 +20,7 @@ import { AuthenticatorService } from '../../../../core/service/authenticator.ser
   templateUrl: './event-category-table.component.html',
   styleUrl: './event-category-table.component.scss'
 })
-export class EventCategoryTableComponent implements OnChanges, OnDestroy {
+export class EventCategoryTableComponent implements OnChanges {
   dataSource: EventCategory[] = [];
   pageInfo: PageInfo = {
     number: 0,
@@ -61,13 +56,6 @@ export class EventCategoryTableComponent implements OnChanges, OnDestroy {
         this.paginator.pageIndex = this.pageEventCategory.page.number;
         this.paginator.pageSize = this.pageEventCategory.page.size;
       });
-    }
-  }
-
-  ngOnDestroy(): void {
-    // Always unsubscribe to prevent memory leaks
-    if (this.obs) {
-      this.obs.unsubscribe();
     }
   }
 

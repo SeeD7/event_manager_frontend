@@ -8,6 +8,8 @@ import { SignInComponent } from './components/user/sign-in/sign-in.component';
 import { ProfilePageComponent } from './components/user/profile-page/profile-page.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 import { EventCategoryListComponent } from './components/event-category/event-category-list/event-category-list.component';
+import { EventFormComponent } from './components/event/event-form/event-form.component';
+import { OrganizerGuard } from '../core/guards/organizer.guard';
 
 const routes: Routes = [
   { path: '', component: FrontPageComponent },
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
   { path: 'profile/edit', component: UpdateUserComponent },
   { path: 'users', component: UserListComponent, canActivate: [AdminGuard] },
-  { path: 'event-categories', component: EventCategoryListComponent, canActivate: [AdminGuard] }
+  { path: 'event-categories', component: EventCategoryListComponent, canActivate: [AdminGuard] },
+  { path: 'events/add', component: EventFormComponent, canActivate: [OrganizerGuard] },
+  { path: 'events/edit/:id', component: EventFormComponent, canActivate: [OrganizerGuard] }
 ];
 
 @NgModule({

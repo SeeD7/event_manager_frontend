@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideToastr } from 'ngx-toastr';
 
 import { routes } from './app.routes';
@@ -9,7 +9,7 @@ import { xhrInterceptor } from './core/interceptors/xhr.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withInterceptors([xhrInterceptor])),
     provideToastr({
       positionClass: 'toast-bottom-center'

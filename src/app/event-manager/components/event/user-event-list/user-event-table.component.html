@@ -1,0 +1,95 @@
+<div class="event-container">
+    <div class="mat-elevetion-z8 table-responsive">
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                <td mat-cell *matCellDef="let event">{{event.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Catégories</th>
+                <td mat-cell *matCellDef="let event"><mat-icon>{{event.category.icon}}</mat-icon> {{event.category.icon}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef>
+                <div class="header-container">
+                    <span>Etat</span>
+                    <mat-form-field class="state" appearance="outline" subscriptSizing="dynamic">
+                    <mat-select [formControl]='stateCtrl' multiple>
+                        @for (state of stateOptions; track state) {
+                        <mat-option [value]="state">{{ state }}</mat-option>
+                        }
+                    </mat-select>
+                    </mat-form-field>
+                </div>
+                </th>
+                <td mat-cell *matCellDef="let event">{{event.state}}</td>
+            </ng-container>
+
+            <!--app-event-category-list matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Etat</th>
+                <td mat-cell *matCellDef="let event">{{event.state}}</td>
+            </ng-container>-->
+
+            <ng-container matColumnDef="startDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Début</th>
+                <td mat-cell *matCellDef="let event">{{event.startDate | date:'yyyy/MM/dd HH:mm'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="endDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Fin</th>
+                <td mat-cell *matCellDef="let event">{{event.endDate | date:'yyyy/MM/dd HH:mm'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="spotsAvailable">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Places</th>
+                <td mat-cell *matCellDef="let event">{{event.spotsAvailable > 0 ? event.spotsAvailable : "-"}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="participants">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Participants</th>
+                <td mat-cell *matCellDef="let event">{{event.participants.size}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="createdDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de création</th>
+                <td mat-cell *matCellDef="let event">{{event.createdDate | date:'yyyy/MM/dd HH:mm'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastUpdatedDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de modification</th>
+                <td mat-cell *matCellDef="let event">{{event.lastUpdatedDate | date:'yyyy/MM/dd HH:mm'}}</td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="action-header"> Actions </th>
+                <td mat-cell *matCellDef="let category">
+                    <!--<button mat-icon-button color="accent" matTooltip="Modifier" (click)="edit.emit(category)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" matTooltip="Supprimer" (click)="delete.emit(category)">
+                        <mat-icon>delete</mat-icon>
+                    </button>-->
+                        <button mat-button (click)="edit.emit(category)">
+                        <mat-icon class="grey">edit</mat-icon>
+                    </button>
+
+                    <button mat-button color="warn"  (click)="delete.emit(category)">
+                        <mat-icon class="red">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+
+            <tr class="mat-row" matNoDataRow>
+                <td class="mat-cell empty-cell" collspan="3">Aucun évènement créé pour le moment.</td>
+            </tr>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
+    </div>
+</div>

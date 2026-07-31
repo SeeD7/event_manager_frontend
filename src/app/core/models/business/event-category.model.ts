@@ -1,5 +1,3 @@
-import { User } from "./user.model";
-
 export class EventCategory {
     id!: number;
     name!: string;
@@ -8,4 +6,10 @@ export class EventCategory {
     creator!: String;
     lastUpdatedDate!: Date;
     lastUpdater!: string;
+}
+
+export class EventCategoryLight {
+    id!: number;
+    name!: string;
+    icon!: string;
 }

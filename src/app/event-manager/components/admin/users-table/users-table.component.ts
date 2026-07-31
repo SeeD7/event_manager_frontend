@@ -14,7 +14,7 @@ import { debounceTime, Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { User } from '../../../../core/models/business/user.model';
 import { RoleEnum } from '../../../../core/models/business/role.enum';
-import { SearchUser } from '../../../../core/models/search/search.user.model';
+import { SearchUser } from '../../../../core/models/search/search-user.model';
 
 @Component({
   selector: 'app-users-table',
@@ -98,6 +98,6 @@ export class UsersTableComponent implements OnChanges, OnDestroy {
   }
 
   onPageChange(event: PageEvent) {
-    this.loadUsers.emit({search: this.mainForm.value ,pageIndex: event.pageIndex, pageSize: event.pageSize});
+    this.loadUsers.emit({search: this.mainForm.value, pageIndex: event.pageIndex, pageSize: event.pageSize});
   }
 }

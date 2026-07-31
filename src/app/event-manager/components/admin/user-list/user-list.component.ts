@@ -7,7 +7,7 @@ import { UsersService } from '../../../services/users.service';
 import { BehaviorSubject, finalize, of, switchMap } from 'rxjs';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { AsyncPipe } from '@angular/common';
-import { SearchUser } from '../../../../core/models/search/search.user.model';
+import { SearchUser } from '../../../../core/models/search/search-user.model';
 import { User } from '../../../../core/models/business/user.model';
 import { RoleEnum } from '../../../../core/models/business/role.enum';
 
