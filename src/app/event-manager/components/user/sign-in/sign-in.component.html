@@ -1,4 +1,8 @@
-<app-user-form (submitForm)="createProfile($event)"/>
-<div class="align-content">
-    @if(loading){<mat-spinner color="primary" mode="indeterminate"></mat-spinner><br/>}
+<div class="main-content">
+    <div class="align-content">
+        <app-user-form (submitForm)="createProfile($event)" />
+        <div class="align-content">
+            @if(loading){<mat-spinner color="primary" mode="indeterminate"></mat-spinner><br/>}
+        </div>
+    </div>
 </div>

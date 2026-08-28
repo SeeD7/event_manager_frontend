@@ -10,6 +10,7 @@ import { UpdateUserComponent } from './components/user/update-user/update-user.c
 import { EventCategoryListComponent } from './components/event-category/event-category-list/event-category-list.component';
 import { EventFormComponent } from './components/event/event-form/event-form.component';
 import { OrganizerGuard } from '../core/guards/organizer.guard';
+import { ListDisplayComponent } from './components/calendar/list/list-display/list-display.component';
 
 const routes: Routes = [
   { path: '', component: FrontPageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'inscription', component: SignInComponent },
   { path: 'profile', component: ProfilePageComponent },
   { path: 'profile/edit', component: UpdateUserComponent },
+  { path: 'agenda', component: ListDisplayComponent },
   { path: 'users', component: UserListComponent, canActivate: [AdminGuard] },
   { path: 'event-categories', component: EventCategoryListComponent, canActivate: [AdminGuard] },
   { path: 'events/add', component: EventFormComponent, canActivate: [OrganizerGuard] },

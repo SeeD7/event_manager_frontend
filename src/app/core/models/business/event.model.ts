@@ -1,4 +1,4 @@
-import { EventCategory, EventCategoryLight } from "./event-category.model";
+import { EventCategoryLight } from "./event-category.model";
 import { EventStateEnum } from "./event-state.enum";
 import { User } from "./user.model";
 
@@ -17,6 +17,8 @@ export class Event {
     participants!: User[];
     createdDate!: Date;
     lastUpdatedDate!: Date;
+    isCurrentUserRegistered!: boolean;
+    isCurrentUserInWaitingList!: boolean;
 }
 
 export class EventForm {
@@ -31,4 +33,17 @@ export class EventForm {
     endDate!: Date;
     spotsAvailable!: number;
     participants!: User[];
+}
+
+export class EventLight {
+    id!: number;
+    name!: string;
+    category!: EventCategoryLight[];
+    state!: EventStateEnum;
+    allDay!: boolean;
+    startDate!: Date;
+    endDate!: Date;
+    spotsAvailable!: number;
+    participants!: number;
+    waitingList!: number;
 }

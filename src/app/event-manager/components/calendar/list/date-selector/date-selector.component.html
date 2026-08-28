@@ -1,0 +1,69 @@
+<div class="align-content">
+    <div [formGroup]="displayTypeForm">
+        <mat-radio-group name="displayType" formControlName="displayType" (change)="onDisplayTypeChanged($any($event))">
+            <mat-radio-button [value]="1">Jour</mat-radio-button>
+            <mat-radio-button [value]="2">Mois</mat-radio-button>
+            <mat-radio-button [value]="3">Année</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div [formGroup]="dateSelectForm" class="select-row padding">
+        @if(displayTypeValue() <= 1){
+            <mat-select formControlName="day" style="width:80px;">
+                @for (item of daysList(); track item) {
+                    <mat-option [value]="item"> {{ item }} </mat-option>
+                }
+            </mat-select>
+        }
+        
+        @if(displayTypeValue() <= 2){
+            <mat-select formControlName="month" (selectionChange)="onSelectMonth()" style="width:145px;">
+                @for (item of range(0, 11); track item) {
+                    <mat-option [value]="item"> {{ monthList[item] }} </mat-option>
+                }
+            </mat-select>
+        }
+        
+        <mat-select formControlName="year" style="width:105px;">
+            @for (item of range(1980, currentDate().getFullYear() + 2); track item) {
+                <mat-option [value]="item"> {{ item }} </mat-option>
+            }
+        </mat-select>
+        <button (click)="validate()">Mettre à jour</button>
+    </div>
+    
+    <div class="padding">
+        <div class="arrow-stack left" (click)="setDate(currentDate().setFullYear(currentDate().getFullYear() - 1))">
+            <mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_left</mat-icon>
+        </div>
+        
+        @if(displayTypeValue() <= 2){
+            <div class="arrow-stack left" (click)="setDate(currentDate().setMonth(currentDate().getMonth() - 1))">
+                <mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_left</mat-icon>
+            </div>
+        }
+
+        @if(displayTypeValue() <= 1){
+            <div class="arrow-stack left" (click)="setDate(currentDate().setDate(currentDate().getDate() - 1))">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </div>
+        }
+
+        <span class="big-text">{{currentDate() | date:dateFormat[displayTypeValue()-1]}}</span>
+        
+        @if(displayTypeValue() <= 1){
+            <div class="arrow-stack right" (click)="setDate(currentDate().setDate(currentDate().getDate() + 1))">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </div>
+        }
+        
+        @if(displayTypeValue() <= 2){
+            <div class="arrow-stack right" (click)="setDate(currentDate().setMonth(currentDate().getMonth() + 1))">
+                <mat-icon>keyboard_arrow_right</mat-icon><mat-icon>keyboard_arrow_right</mat-icon>
+            </div>
+        }
+
+        <div class="arrow-stack right" (click)="setDate(currentDate().setFullYear(currentDate().getFullYear() + 1))">
+            <mat-icon>keyboard_arrow_right</mat-icon><mat-icon>keyboard_arrow_right</mat-icon><mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<mat-expansion-panel class="event-card" (opened)="onCardOpened()">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="card-title">
+      <span class="event-name">{{ eventLight().name }}</span>
+    </mat-panel-title>
+
+    <mat-panel-description class="card-summary">
+        <div class="categories">
+            @for (cat of eventLight().category; track cat.name) {
+                <mat-icon class="chip-icon">{{ cat.icon || 'label' }}</mat-icon>
+                <!--<mat-chip class="category-chip">{{ cat.name }}</mat-chip>-->
+            }
+        </div>
+
+        <div class="time-info">
+            <mat-icon>schedule</mat-icon>
+            @if (eventLight().allDay) {
+              <span>Toute la journée</span>
+            } @else {
+                <span>{{ eventLight().startDate | date:'HH:mm' }}
+                @if(compareDates()){ - {{ eventLight().endDate | date:'HH:mm' }} }
+                </span>
+            }
+        </div>
+
+      <div class="spots-info" [class.full]="eventLight().spotsAvailable > 0 && eventLight().participants + eventLight().waitingList >= eventLight().spotsAvailable">
+        <mat-icon>group</mat-icon>
+        @if (eventLight().spotsAvailable > 0) {
+          <span>{{ eventLight().participants + eventLight().waitingList}} / {{ eventLight().spotsAvailable }} participants</span>
+        } @else {
+          <span class="full-label"> {{ eventLight().participants + eventLight().waitingList}} / &infin; participants</span>
+        }
+      </div>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  @if (isLoading()) {
+    <div class="loader-container">
+      <mat-spinner diameter="30"></mat-spinner>
+      <span>Chargement des détails...</span>
+    </div>
+  } @else {
+    <div class="card-details">
+      
+      <!-- Lieu -->
+      @if (fullEvent()?.location) {
+        <div class="detail-item">
+          <mat-icon>location_on</mat-icon>
+          <span><strong>Lieu :</strong> {{ fullEvent()?.location }}</span>
+        </div>
+      }
+
+      <!-- Créateur -->
+      <div class="detail-item">
+        <mat-icon>person</mat-icon>
+        <span><strong>Organisé par :</strong> {{ fullEvent()?.creator }}</span>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Description -->
+      <div class="description-section">
+        <h4>Description</h4>
+        <p>{{ fullEvent()?.description || 'Aucune description fournie.' }}</p>
+      </div>
+
+      <mat-action-row>
+        <span class="spacer"></span>
+        @if(!fullEvent()?.isCurrentUserRegistered && !fullEvent()?.isCurrentUserInWaitingList){
+          @if (eventLight().spotsAvailable > 0 && eventLight().participants + eventLight().waitingList < eventLight().spotsAvailable) {
+            <button mat-flat-button color="primary" (click)="onRegister($event)">
+              S'inscrire
+            </button>
+          } @else {
+            <button mat-stroked-button color="primary" (click)="onRegister($event)">
+              Rejoindre la liste d'attente
+            </button>
+          }
+        } @else {
+          @if (fullEvent()?.isCurrentUserRegistered) {
+            <button mat-flat-button class="red-button" (click)="onUnregister($event)">
+              Se désinscrire
+            </button>
+          } @else {
+            <button mat-stroked-button class="red-button" (click)="onUnregister($event)">
+              Quitter la liste d'attente
+            </button>
+          }
+        }
+      </mat-action-row>
+
+    </div>
+  }
+
+</mat-expansion-panel>

@@ -2,9 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Page } from '../../core/models/page.model';
 import { Observable } from 'rxjs';
-import { Event, EventForm } from '../../core/models/business/event.model';
+import { Event, EventForm, EventLight } from '../../core/models/business/event.model';
 import { environment } from '../../../environments/environment.development';
 import { SearchEvent } from '../../core/models/search/search-event.model';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ import { SearchEvent } from '../../core/models/search/search-event.model';
 export class EventService {
   
   private http = inject(HttpClient);
+  private datePipe = inject(DatePipe);
   private route = "/event"
 
   getEventPaged(search: SearchEvent, page: number, size: number): Observable<Page<Event>> {
@@ -28,6 +30,15 @@ export class EventService {
         });
       }
     return this.http.get<Page<Event>>(`${environment.apiUrl}${this.route}s/page`, { params: params, withCredentials: true });
+  }
+
+  getEventList(displayType: number, date: Date): Observable<EventLight[]> {
+    const isoDate = this.datePipe.transform(date, 'yyyy-MM-ddThh:mm:ssZZZZZ');
+
+    let params = new HttpParams()
+      .set('displayType', displayType)
+      .set('date', isoDate ? isoDate : "");
+    return this.http.get<EventLight[]>(`${environment.apiUrl}${this.route}s/list`, { params: params, withCredentials: true });
   }
 
   getEventById(id: number): Observable<Event> {
@@ -53,6 +64,14 @@ export class EventService {
 
   updateEvent(value: EventForm): Observable<Event> {
     return this.http.put<Event>(`${environment.apiUrl}${this.route}`, value, { withCredentials: true });
+  }
+
+  participate(id: number, idUser: number): Observable<boolean> {
+    return this.http.put<boolean>(`${environment.apiUrl}${this.route}/${id}/participate/${idUser}`, {}, { withCredentials: true });
+  }
+
+  cancel(id: number, idUser: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}${this.route}/${id}/cancel/${idUser}`, { withCredentials: true });
   }
   
 }

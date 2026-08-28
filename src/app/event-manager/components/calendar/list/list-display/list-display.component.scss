@@ -1,0 +1,60 @@
+SCSS
+:host {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+// Espacement sous la barre de navigation temporelle
+app-date-selector {
+  display: block;
+  margin-bottom: 24px;
+}
+
+// Le conteneur relatif pour verrouiller le spinner en overlay
+.table-wrapper {
+  margin: 0px 10px;
+  position: relative;
+  min-height: 200px; // Évite que le bloc ne s'écrase s'il n'y a aucun événement
+  display: flex;
+  flex-direction: column;
+  gap: 12px; // Espace régulier entre chaque carte d'événement
+
+  // Overlay de chargement semi-transparent
+  .spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(2px); // Petit effet de flou moderne sur la liste
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    border-radius: 8px;
+  }
+}
+
+// Style optionnel pour l'état "Aucun événement"
+.empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  color: #666;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
+}
+
+.main-form {
+  width: 1200px;
+  padding-bottom: 30px;
+  position: relative;
+}
+
+h2 {
+  padding-left: 20px;
+  padding-bottom: 0px;
+}

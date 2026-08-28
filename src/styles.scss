@@ -94,3 +94,14 @@ button.secondary {
   justify-content: center;
   gap: 12px;
 }
+
+.error-text {
+  color: red;
+}
+
+.align-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

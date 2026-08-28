@@ -1,0 +1,32 @@
+<div class="align-content">
+  <mat-card class="main-form">
+  <app-date-selector 
+    (dateChanged)="onDateChanged($event)" 
+    (displayTypeChanged)="displayTypeChanged($event)" 
+  />
+
+  <div class="table-wrapper">
+    @let events = events$ | async;
+    @let loading = loading$ | async;
+
+    @if (events && events.size > 0) {
+      @for (dates of events; track dates[0]) {
+        <h2>{{ dates[0] }}</h2>
+        @for (event of dates[1]; track event.id) {
+          <app-event-card [eventLight]="event" />
+        }
+      }
+    } @else if (!loading) {
+      <div class="empty-state">
+        <p>Aucun événement prévu pour cette période.</p>
+      </div>
+    }
+
+    @if (loading) {
+      <div class="spinner-overlay">
+        <mat-spinner color="primary" diameter="50"></mat-spinner>
+      </div>
+    }
+  </div>
+  </mat-card>
+</div>
