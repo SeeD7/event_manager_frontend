@@ -18,6 +18,7 @@ mat-card-title {
 }
 
 .main-form {
+  width: 800px;
   padding-bottom: 30px;
   position: relative;
 }
@@ -36,26 +37,11 @@ mat-card-title {
   align-items: center;
 }
 
-.error-text {
-  color: red;
-}
-
-.align-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 button {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 120px;
-}
-
-.table-wrapper {
-  position: relative;
 }
 
 .spinner-overlay {

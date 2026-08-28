@@ -1,0 +1,58 @@
+.arrow-stack {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Assure que la hauteur correspond exactement à une icône Material */
+  height: 24px; 
+  
+  mat-icon {
+    font-size: 20px; /* Légèrement réduit pour éviter un pavé trop large */
+    width: 20px;
+    height: 20px;
+  }
+
+  // Chevauchement pour les flèches gauches
+  &.left {
+    mat-icon:not(:first-child) {
+      margin-left: -15px; /* Ajuѕte cette valeur pour resserrer/écarter les flèches */
+    }
+  }
+
+  // Chevauchement pour les flèches droites
+  &.right {
+    mat-icon:not(:first-child) {
+      margin-left: -15px;
+    }
+  }
+}
+
+.align-content {
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.big-text {
+  padding: 0 15px;
+  font-size: 24px;
+}
+
+.padding {
+  padding: 15px 0;
+}
+
+.select-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px; /* Space between selects */
+  align-items: flex-start; /* Aligns top edges */
+}
+
+button {
+  padding: 4px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #BBBBBB;
+  color: rgb(0, 0, 0);
+  transition: 0.2s;
+}
