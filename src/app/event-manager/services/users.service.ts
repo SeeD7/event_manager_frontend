@@ -1,18 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../../core/models/user.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { Page } from '../../core/models/page.model';
-import { RoleEnum } from '../../core/models/role.enum';
-import { SearchUser } from '../../core/models/search.user.model';
+import { User } from '../../core/models/business/user.model';
+import { SearchUser } from '../../core/models/search/search-user.model';
+import { RoleEnum } from '../../core/models/business/role.enum';
 
 @Injectable()
 export class UsersService {
     private http = inject(HttpClient);
 
     getUsers(search: SearchUser, page: number, size: number): Observable<Page<User>> {
-        console.log("On viens ici avec un search : " + search);
         let params = new HttpParams()
             .set('page', page.toString())
             .set('size', size.toString())
@@ -29,7 +28,6 @@ export class UsersService {
     }
 
     updateUser(id: number, value: User): Observable<User> {
-        
         return this.http.put<User>(`${environment.apiUrl}/user/${id}`, value, { withCredentials: true });
     }
 

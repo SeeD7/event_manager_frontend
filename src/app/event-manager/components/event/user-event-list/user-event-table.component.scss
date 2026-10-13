@@ -1,0 +1,85 @@
+@use '@angular/material' as mat;
+
+.event-container {
+  padding: 24px;
+  //max-width: 1600px;
+  margin: 0 auto;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-actions h1 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+}
+
+.action-header {
+  text-align: center;
+}
+
+td.mat-column-actions {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.empty-cell {
+  text-align: center;
+  padding: 40px !important;
+  color: #757575;
+  font-style: italic;
+}
+
+button mat-icon {
+  margin-right: 4px;
+}
+
+mat-form-field {
+  width: 100px;
+  font-size: 12px;
+}
+
+.state {
+  width: 100px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0;
+  gap: 2px;
+}
+
+:host {
+  @include mat.form-field-overrides((
+    container-height: 28px,
+    container-vertical-padding: 2px,
+  ));
+}
+
+.mat-mdc-button>.mat-icon {
+    margin: 0px;
+}
+
+.grey {
+    color: grey;
+}
+
+.red {
+    color: red;
+}

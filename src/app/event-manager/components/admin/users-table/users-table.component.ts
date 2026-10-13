@@ -1,11 +1,9 @@
-import { Component, inject, Input, OnChanges, OnDestroy, output, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnDestroy, output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { User } from '../../../../core/models/user.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Page } from '../../../../core/models/page.model';
-import { RoleEnum } from '../../../../core/models/role.enum';
 import { CommonModule } from '@angular/common';
 import { PageInfo } from '../../../../core/models/page-info.model';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,12 +12,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
-import { SearchUser } from '../../../../core/models/search.user.model';
+import { User } from '../../../../core/models/business/user.model';
+import { RoleEnum } from '../../../../core/models/business/role.enum';
+import { SearchUser } from '../../../../core/models/search/search-user.model';
 
 @Component({
   selector: 'app-users-table',
   imports: [ReactiveFormsModule, MatTableModule, MatPaginator, MatButtonModule, MatIcon, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule],
   templateUrl: './users-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './users-table.component.scss'
 })
 export class UsersTableComponent implements OnChanges, OnDestroy {
@@ -39,7 +40,7 @@ export class UsersTableComponent implements OnChanges, OnDestroy {
   public roleOptions = Object.values(RoleEnum);
 
   columnsToDisplay = ['firstName', 'lastName', 'username', 'role', 'email', 'actions'];
-  
+
   private formBuilder = inject(FormBuilder);
   @Input() pageUser!: Page<User>;
 
@@ -52,7 +53,7 @@ export class UsersTableComponent implements OnChanges, OnDestroy {
   usernameCtrl!: FormControl;
   roleCtrl!: FormControl;
   emailCtrl!: FormControl;
-  
+
   private obs!: Subscription;
 
   ngOnInit(): void {
@@ -98,6 +99,6 @@ export class UsersTableComponent implements OnChanges, OnDestroy {
   }
 
   onPageChange(event: PageEvent) {
-    this.loadUsers.emit({search: this.mainForm.value ,pageIndex: event.pageIndex, pageSize: event.pageSize});
+    this.loadUsers.emit({search: this.mainForm.value, pageIndex: event.pageIndex, pageSize: event.pageSize});
   }
 }

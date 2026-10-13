@@ -1,0 +1,26 @@
+<div class="category-list-container">
+  <div class="header-actions">
+    <h2>Liste des catégories d'évènement</h2>
+    <button mat-raised-button color="primary" class="inline-flex-btn" (click)="onCreateCategory()">
+    <mat-icon>add</mat-icon>
+        Ajouter une catégorie
+    </button>
+  </div>
+
+  <div class="table-wrapper">
+    @let eventCategories = eventCategories$ | async;
+    @if (eventCategories) {
+        <app-event-category-table [pageEventCategory]="eventCategories" 
+        (edit)="editRow($event)" 
+        (delete)="deleteRow($event)" 
+        (loadEventCategories)="loadFromChild($event)"/>
+    }
+
+    @let loading = loading$ | async;
+    @if(loading){
+        <div class="spinner-overlay">
+            <mat-spinner color="primary" mode="indeterminate"></mat-spinner>
+        </div>
+    }
+  </div>
+</div>

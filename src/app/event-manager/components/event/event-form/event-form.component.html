@@ -1,0 +1,91 @@
+<div class="form-container">
+  <h2>{{ formTitle() }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nom de l'évènement</mat-label>
+      <input matInput formControlName="name" placeholder="Ex: Tournoi de volley-ball">
+      @if (form.get('name')?.hasError('required')) {
+        <mat-error>Le nom est obligatoire</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="4" placeholder="Décrivez l'évènement..."></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Localisation</mat-label>
+      <input matInput formControlName="location" placeholder="Ex: 12 Rue des Sports, Paris">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Catégories d'évènement</mat-label>
+      <mat-select formControlName="category" multiple [compareWith]="compareCategories">
+        <mat-select-trigger>
+        @if (form.get('category')?.value?.length) {
+            <mat-chip-set>
+              @for (cat of form.get('category')?.value; track cat.id) {
+                <mat-chip class="custom-category-chip">
+                  <div class="chip-content">
+                    <mat-icon class="chip-icon">{{ cat.icon || 'label' }}</mat-icon>
+                    <span class="chip-text">{{ cat.name }}</span>
+                    <button matChipRemove (click)="removeCategory(cat)" type="button">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </mat-chip>
+              }
+            </mat-chip-set>
+        }
+        </mat-select-trigger>
+        @for (cat of category(); track cat.id) {
+          <mat-option [value]="cat">
+            <span class="inline-flex-option">
+              <mat-icon class="chip-icon">{{ cat.icon || 'label' }}</mat-icon>
+              {{ cat.name }}
+            </span>
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="checkbox-wrapper">
+      <mat-checkbox formControlName="allDay">Évènement sur toute la journée</mat-checkbox>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Date de début</mat-label>
+        <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+        <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Date de fin</mat-label>
+        <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+        <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="small-width">
+      <mat-label>Nombre de places</mat-label>
+      <input matInput type="number" formControlName="spotsAvailable">
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-stroked-button type="button">Annuler</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ submitButtonText() }}
+      </button>
+    </div>
+
+  </form>
+</div>
+<div class="align-content">
+    @if(loading){<mat-spinner color="primary" mode="indeterminate"></mat-spinner><br/>}
+</div>

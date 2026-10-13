@@ -1,20 +1,26 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from "./core/components/header/header";
 import { AuthenticatorService } from './core/service/authenticator.service';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import localeFrExtra from '@angular/common/locales/extra/fr';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Header],
+  providers: [DatePipe],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss'
 })
 export class App {
   private authenticatorService = inject(AuthenticatorService);
 
   protected readonly title = signal('event-manager-frontend');
-  
+
   constructor(){
     this.authenticatorService.checkSession();
+    registerLocaleData(localeFr, 'fr', localeFrExtra);
   }
 }

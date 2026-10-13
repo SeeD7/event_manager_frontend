@@ -1,0 +1,87 @@
+.form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    margin-bottom: 2rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .full-width {
+    width: 100%;
+    margin-bottom: 1.2rem;
+  }
+
+  .row {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .half-width {
+    flex: 1;
+  }
+
+  .small-width {
+    width: 200px;
+  }
+
+  .checkbox-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .inline-flex-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* Style des capsules personnalisées réclamées */
+  .chips-wrapper {
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    background-color: #fafafa;
+  }
+
+  .custom-category-chip {
+    .chip-content {
+      display: flex;
+      align-items: center;
+      justify-content: center; // Centrage total !
+      gap: 6px;
+      
+      .chip-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chip-text {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+}

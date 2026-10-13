@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cancel-confirm-modal',
   imports: [],
   templateUrl: './cancel-confirm-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './cancel-confirm-modal.component.scss',
 })
 export class CancelConfirmModalComponent {

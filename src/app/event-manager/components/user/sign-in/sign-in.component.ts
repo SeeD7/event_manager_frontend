@@ -1,0 +1,41 @@
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { tap } from 'rxjs';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UserFormComponent } from '../user-form/user-form.component';
+import { UsersService } from '../../../services/users.service';
+import { User } from '../../../../core/models/business/user.model';
+
+@Component({
+  selector: 'app-sign-in',
+  imports: [UserFormComponent, MatProgressSpinner],
+  templateUrl: './sign-in.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './sign-in.component.scss',
+})
+export class SignInComponent {
+  private usersService = inject(UsersService);
+  private router = inject(Router);
+  private toastr = inject(ToastrService);
+
+  loading = false;
+
+  createProfile(user: User) {
+    this.loading = true;
+
+    this.usersService
+      .createUser(user)
+      .pipe(
+        tap((saved) => {
+          this.loading = false;
+          if (saved) {
+            this.toastr.success('Inscription réussie ! Bienvenue !', 'Success');
+            this.router.navigateByUrl('/event-manager/auth/login');
+          } else {
+            this.toastr.error('Echec de l\'inscription.', 'Error');
+          }
+        }),
+      ).subscribe();
+  }
+}

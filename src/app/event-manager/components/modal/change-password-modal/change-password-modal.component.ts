@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +13,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'app-change-password-modal',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatFormFieldModule, MatInputModule, AsyncPipe],
   templateUrl: './change-password-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './change-password-modal.component.scss',
 })
 export class ChangePasswordModalComponent implements OnInit {
@@ -57,7 +58,7 @@ export class ChangePasswordModalComponent implements OnInit {
     } else {
       this.form.markAllAsTouched();
     }
-  }  
+  }
 
   cancel() {
     this.dialogRef.close();

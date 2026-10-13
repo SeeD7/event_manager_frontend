@@ -1,0 +1,46 @@
+mat-form-field {
+  width: 45%;
+  &.full-width {
+    width: 80%;
+    margin-left: 10%;
+  }
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-card {
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.main-form {
+  width : 1000px;
+  padding-left : 10px;
+  padding-right : 10px;
+  margin-left: 10px;
+  margin-right:10px;
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.align-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+}
+
+.extra-space {
+  padding-bottom: 38px;
+}
