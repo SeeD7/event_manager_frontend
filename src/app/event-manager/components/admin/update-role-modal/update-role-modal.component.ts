@@ -1,5 +1,5 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { RoleEnum } from '../../../../core/models/business/role.enum';
   selector: 'app-update-role-modal',
   imports: [MatSelectModule, KeyValuePipe, ReactiveFormsModule],
   templateUrl: './update-role-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './update-role-modal.component.scss',
 })
 export class UpdateRoleModalComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { tap } from 'rxjs';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { User } from '../../../../core/models/business/user.model';
   selector: 'app-sign-in',
   imports: [UserFormComponent, MatProgressSpinner],
   templateUrl: './sign-in.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sign-in.component.scss',
 })
 export class SignInComponent {
@@ -22,7 +23,7 @@ export class SignInComponent {
 
   createProfile(user: User) {
     this.loading = true;
-    
+
     this.usersService
       .createUser(user)
       .pipe(

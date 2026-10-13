@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, output, ViewChild } from '@angular/core';
+import { Component, inject, input, OnInit, output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { PageInfo } from '../../../../core/models/page-info.model';
 import { Event } from '../../../../core/models/business/event.model';
 import { Page } from '../../../../core/models/page.model';
@@ -20,6 +20,7 @@ import { SearchEvent } from '../../../../core/models/search/search-event.model';
   selector: 'app-user-event-table',
   imports: [ReactiveFormsModule, MatTableModule, MatPaginator, MatButtonModule, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule, MatIcon, DatePipe],
   templateUrl: './user-event-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-event-table.component.scss',
 })
 export class UserEventTableComponent implements OnInit {

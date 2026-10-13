@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, inject } from '@angular/core';
+import { Component, OnInit, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { EventCategoryTableComponent } from "../event-category-table/event-category-table.component";
 import { MatDialog } from '@angular/material/dialog';
 import { CancelConfirmModalComponent } from '../../../../shared/component/cancel-confirm-modal/cancel-confirm-modal.component';
@@ -16,6 +16,7 @@ import { MatIcon } from '@angular/material/icon';
   selector: 'app-event-category-list',
   imports: [EventCategoryTableComponent, MatProgressSpinner, AsyncPipe, MatIcon],
   templateUrl: './event-category-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './event-category-list.component.scss',
 })
 export class EventCategoryListComponent implements OnInit {

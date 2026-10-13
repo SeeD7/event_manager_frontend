@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import { EventCategory } from '../../../../core/models/business/event-category.m
   selector: 'event-category-modal',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatFormFieldModule, MatInputModule],
   templateUrl: './event-category-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './event-category-modal.component.scss',
 })
 export class EventCategoryModalComponent implements OnInit {
@@ -57,7 +58,7 @@ export class EventCategoryModalComponent implements OnInit {
     } else {
       this.form.markAllAsTouched();
     }
-  }  
+  }
 
   cancel() {
     this.dialogRef.close();

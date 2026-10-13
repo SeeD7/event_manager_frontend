@@ -23,12 +23,12 @@
             }
         </div>
 
-      <div class="spots-info" [class.full]="eventLight().spotsAvailable > 0 && eventLight().participants + eventLight().waitingList >= eventLight().spotsAvailable">
+      <div class="spots-info" [class.full]="eventLight().spotsAvailable > 0 && participants() + waitingList() >= eventLight().spotsAvailable">
         <mat-icon>group</mat-icon>
         @if (eventLight().spotsAvailable > 0) {
-          <span>{{ eventLight().participants + eventLight().waitingList}} / {{ eventLight().spotsAvailable }} participants</span>
+          <span>{{ participants() + waitingList()}} / {{ eventLight().spotsAvailable }} participants</span>
         } @else {
-          <span class="full-label"> {{ eventLight().participants + eventLight().waitingList}} / &infin; participants</span>
+          <span class="full-label"> {{ participants() + waitingList()}} / &infin; participants</span>
         }
       </div>
     </mat-panel-description>
@@ -38,21 +38,21 @@
       <mat-spinner diameter="30"></mat-spinner>
       <span>Chargement des détails...</span>
     </div>
-  } @else {
+  } @else if (fullEvent(); as event) {
     <div class="card-details">
-      
+
       <!-- Lieu -->
-      @if (fullEvent()?.location) {
+      @if (event.location) {
         <div class="detail-item">
           <mat-icon>location_on</mat-icon>
-          <span><strong>Lieu :</strong> {{ fullEvent()?.location }}</span>
+          <span><strong>Lieu :</strong> {{ event.location }}</span>
         </div>
       }
 
       <!-- Créateur -->
       <div class="detail-item">
         <mat-icon>person</mat-icon>
-        <span><strong>Organisé par :</strong> {{ fullEvent()?.creator }}</span>
+        <span><strong>Organisé par :</strong> {{ event.creator }}</span>
       </div>
 
       <mat-divider></mat-divider>
@@ -60,13 +60,13 @@
       <!-- Description -->
       <div class="description-section">
         <h4>Description</h4>
-        <p>{{ fullEvent()?.description || 'Aucune description fournie.' }}</p>
+        <p>{{ event.description || 'Aucune description fournie.' }}</p>
       </div>
 
       <mat-action-row>
         <span class="spacer"></span>
-        @if(!fullEvent()?.isCurrentUserRegistered && !fullEvent()?.isCurrentUserInWaitingList){
-          @if (eventLight().spotsAvailable > 0 && eventLight().participants + eventLight().waitingList < eventLight().spotsAvailable) {
+        @if(!event.isCurrentUserRegistered && !event.isCurrentUserInWaitingList){
+          @if (event.spotsAvailable > 0 && event.participants.length + event.waitingList.length < event.spotsAvailable) {
             <button mat-flat-button color="primary" (click)="onRegister($event)">
               S'inscrire
             </button>
@@ -76,7 +76,7 @@
             </button>
           }
         } @else {
-          @if (fullEvent()?.isCurrentUserRegistered) {
+          @if (event.isCurrentUserRegistered) {
             <button mat-flat-button class="red-button" (click)="onUnregister($event)">
               Se désinscrire
             </button>

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, output, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -18,6 +18,7 @@ import { EventCategory } from '../../../../core/models/business/event-category.m
   selector: 'app-event-category-table',
   imports: [ReactiveFormsModule, MatTableModule, MatPaginator, MatButtonModule, MatIcon, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule, DatePipe],
   templateUrl: './event-category-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './event-category-table.component.scss'
 })
 export class EventCategoryTableComponent implements OnChanges {
@@ -35,11 +36,11 @@ export class EventCategoryTableComponent implements OnChanges {
 
 
   columnsToDisplay = ['icon', 'name', 'creator', 'createdDate', 'lastUpdater', 'lastUpdatedDate', 'actions'];
-  
+
   @Input() pageEventCategory!: Page<EventCategory>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
+
   private obs!: Subscription;
 
   ngOnInit(): void {

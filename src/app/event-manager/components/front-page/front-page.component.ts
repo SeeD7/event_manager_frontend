@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { AuthenticatorService } from '../../../core/service/authenticator.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule],
   templateUrl: './front-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './front-page.component.scss',
 })
 export class FrontPageComponent {

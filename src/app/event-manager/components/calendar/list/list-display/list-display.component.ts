@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, OnInit } from '@angular/core';
 import { DateSelectorComponent } from "../date-selector/date-selector.component";
-import { BehaviorSubject, groupBy, map, mergeMap, switchMap, tap, zip } from 'rxjs';
+import { BehaviorSubject, map, switchMap, tap } from 'rxjs';
 import { EventService } from '../../../../services/event.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -14,7 +14,7 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './list-display.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListDisplayComponent {
+export class ListDisplayComponent implements OnInit {
   eventService = inject(EventService);
 
   datePipe = new DatePipe("fr");

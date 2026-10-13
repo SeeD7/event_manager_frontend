@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-event-list',
   imports: [],
   templateUrl: './event-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './event-list.component.scss',
 })
 export class EventListComponent {

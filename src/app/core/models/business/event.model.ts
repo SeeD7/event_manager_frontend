@@ -15,6 +15,7 @@ export class Event {
     endDate!: Date;
     spotsAvailable!: number;
     participants!: User[];
+    waitingList!: User[];
     createdDate!: Date;
     lastUpdatedDate!: Date;
     isCurrentUserRegistered!: boolean;

@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnChanges, OnDestroy, output, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnDestroy, output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -20,6 +20,7 @@ import { SearchUser } from '../../../../core/models/search/search-user.model';
   selector: 'app-users-table',
   imports: [ReactiveFormsModule, MatTableModule, MatPaginator, MatButtonModule, MatIcon, CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule],
   templateUrl: './users-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './users-table.component.scss'
 })
 export class UsersTableComponent implements OnChanges, OnDestroy {
@@ -39,7 +40,7 @@ export class UsersTableComponent implements OnChanges, OnDestroy {
   public roleOptions = Object.values(RoleEnum);
 
   columnsToDisplay = ['firstName', 'lastName', 'username', 'role', 'email', 'actions'];
-  
+
   private formBuilder = inject(FormBuilder);
   @Input() pageUser!: Page<User>;
 
@@ -52,7 +53,7 @@ export class UsersTableComponent implements OnChanges, OnDestroy {
   usernameCtrl!: FormControl;
   roleCtrl!: FormControl;
   emailCtrl!: FormControl;
-  
+
   private obs!: Subscription;
 
   ngOnInit(): void {

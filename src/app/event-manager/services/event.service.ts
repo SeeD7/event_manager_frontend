@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
   providedIn: 'root',
 })
 export class EventService {
-  
+
   private http = inject(HttpClient);
   private datePipe = inject(DatePipe);
   private route = "/event"
@@ -35,7 +35,7 @@ export class EventService {
   getEventList(displayType: number, date: Date): Observable<EventLight[]> {
     const isoDate = this.datePipe.transform(date, 'yyyy-MM-ddThh:mm:ssZZZZZ');
 
-    let params = new HttpParams()
+    const params = new HttpParams()
       .set('displayType', displayType)
       .set('date', isoDate ? isoDate : "");
     return this.http.get<EventLight[]>(`${environment.apiUrl}${this.route}s/list`, { params: params, withCredentials: true });
@@ -56,8 +56,8 @@ export class EventService {
 
   createEvent(value: EventForm): Observable<Event> {
     return this.http.post<Event>(`${environment.apiUrl}${this.route}`, value, { withCredentials: true });
-  }   
-  
+  }
+
   deleteEvent(id: number): Observable<Event> {
     return this.http.delete<Event>(`${environment.apiUrl}${this.route}/${id}`, { withCredentials: true });
   }
@@ -66,12 +66,12 @@ export class EventService {
     return this.http.put<Event>(`${environment.apiUrl}${this.route}`, value, { withCredentials: true });
   }
 
-  participate(id: number, idUser: number): Observable<boolean> {
-    return this.http.put<boolean>(`${environment.apiUrl}${this.route}/${id}/participate/${idUser}`, {}, { withCredentials: true });
+  participate(id: number, idUser: number): Observable<Event> {
+    return this.http.put<Event>(`${environment.apiUrl}${this.route}/${id}/participate/${idUser}`, {}, { withCredentials: true });
   }
 
-  cancel(id: number, idUser: number): Observable<void> {
-    return this.http.delete<void>(`${environment.apiUrl}${this.route}/${id}/cancel/${idUser}`, { withCredentials: true });
+  cancel(id: number, idUser: number): Observable<Event> {
+    return this.http.delete<Event>(`${environment.apiUrl}${this.route}/${id}/cancel/${idUser}`, { withCredentials: true });
   }
-  
+
 }

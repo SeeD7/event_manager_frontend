@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { UserFormComponent } from "../user-form/user-form.component";
 import { UsersService } from '../../../services/users.service';
 import { tap } from 'rxjs';
@@ -12,6 +12,7 @@ import { User } from '../../../../core/models/business/user.model';
   selector: 'app-update-user',
   imports: [UserFormComponent, MatProgressSpinner],
   templateUrl: './update-user.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './update-user.component.scss',
 })
 export class UpdateUserComponent {

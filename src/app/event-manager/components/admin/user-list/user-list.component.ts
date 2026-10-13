@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { UsersTableComponent } from "../users-table/users-table.component";
 import { MatDialog } from '@angular/material/dialog';
 import { CancelConfirmModalComponent } from '../../../../shared/component/cancel-confirm-modal/cancel-confirm-modal.component';
@@ -15,6 +15,7 @@ import { RoleEnum } from '../../../../core/models/business/role.enum';
   selector: 'app-user-list',
   imports: [UsersTableComponent, MatProgressSpinner, AsyncPipe],
   templateUrl: './user-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, inject, input } from '@angular/core';
+import { Component, OnInit, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -36,6 +36,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatProgressSpinner
   ],
   templateUrl: './event-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './event-form.component.scss'
 })
 export class EventFormComponent implements OnInit {
@@ -49,7 +50,7 @@ export class EventFormComponent implements OnInit {
 
   eventInput:Event | null=null;
 
-  id = input<string>(); 
+  id = input<string>();
 
   isEditMode = computed(() => !!this.id());
   submitButtonText = computed(() => this.isEditMode() ? 'Modifier l\'évènement' : 'Créer l\'évènement');
@@ -110,7 +111,7 @@ export class EventFormComponent implements OnInit {
     if (this.form.invalid) return;
 
     const formValue = this.form.value as EventForm;
-    
+
     if (this.isEditMode()) {
       formValue.id = Number(this.id())
       if(this.eventInput != null){

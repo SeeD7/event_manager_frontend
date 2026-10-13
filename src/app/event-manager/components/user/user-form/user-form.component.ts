@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, output } from '@angular/core';
+import { Component, inject, input, OnInit, output, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, filter, map, Observable, switchMap, tap } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
@@ -15,6 +15,7 @@ import { RoleEnum } from '../../../../core/models/business/role.enum';
   selector: 'app-user-form',
   imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, AsyncPipe, CommonModule],
   templateUrl: './user-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent  implements OnInit {
@@ -157,7 +158,7 @@ export class UserFormComponent  implements OnInit {
       user.password = this.user().password;
       user.role = this.user().role;
     }
-    
+
     this.submitForm.emit(user);
   }
 }

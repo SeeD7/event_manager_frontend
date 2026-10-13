@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { AuthenticatorService } from '../../../../core/service/authenticator.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,6 +19,7 @@ import { EventStateEnum } from '../../../../core/models/business/event-state.enu
   selector: 'app-profile-page',
   imports: [RouterLink, UserEventTableComponent, MatProgressSpinner, AsyncPipe],
   templateUrl: './profile-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './profile-page.component.scss',
 })
 export class ProfilePageComponent {
@@ -77,7 +78,7 @@ export class ProfilePageComponent {
   editRow(event: Event): void {
     this.router.navigateByUrl(`/event-manager/events/edit/${event.id}`);
   }
-  
+
   deleteRow(event: Event) {
     this.loadingSubject.next(true);
         this.dialog.open(CancelConfirmModalComponent, {

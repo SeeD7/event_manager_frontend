@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, output, signal } from '@angular/core';
+import { Component, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { outputFromObservable, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
   selector: 'app-date-selector',
   imports: [ReactiveFormsModule, MatCardModule, MatIconModule, DatePipe, MatSelectModule, MatRadioModule],
   templateUrl: './date-selector.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './date-selector.component.scss',
 })
 export class DateSelectorComponent {
